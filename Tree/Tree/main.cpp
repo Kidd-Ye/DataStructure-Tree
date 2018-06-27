@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <stack>
+#include <queue>
 using namespace std;
 
 typedef struct BiTNode{
@@ -127,7 +128,24 @@ void PostOrder_Two(BiTree T){
     }
 }
 
-
+//层次遍历
+void LevelOrder(BiTree T){
+    queue<BiTree> q;
+    BiTree p = T;
+    
+    q.push(p);
+    while (!q.empty()) {
+        p = q.front();
+        q.pop();
+        cout << p->data << " ";
+        if (p->lchild != NULL) {
+            q.push(p->lchild);
+        }
+        if (p->rchild != NULL) {
+            q.push(p->rchild);
+        }
+    }
+}
 
 
 int main(int argc, const char * argv[]) {
@@ -153,5 +171,8 @@ int main(int argc, const char * argv[]) {
     cout << endl;
     cout << "3.后序非递归遍历" << endl;
     PostOrder_Two(Tree1);
+    cout << endl;
+    cout << "4.层次遍历" << endl;
+    LevelOrder(Tree1);
     return 0;
 }
